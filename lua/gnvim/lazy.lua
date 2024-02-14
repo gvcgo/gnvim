@@ -38,12 +38,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   })
 end
 
--- Add lazy dir to runtime path.
+-- Add lazypath to runtime path.
 vim.opt.rtp:prepend(lazypath)
 
 -- lazy config
 require("lazy").setup({
-    spec = {{ import = "plugins" }}, -- plugins configs
+    spec = {{ import = "plugins" }}, -- plugins configs in "lua/plugins/"
     defaults = { lazy = true },
     git = { filter = modern_git },
     install = { colorscheme = { "habamax" } },
