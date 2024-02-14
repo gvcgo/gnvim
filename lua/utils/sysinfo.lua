@@ -21,4 +21,10 @@ end
 
 parseos()
 
+if M.os == 'windows' then
+    M.homedir = os.getenv("HOMEPATH")
+else
+    M.homedir = os.getenv("HOME")
+end
+
 return M
