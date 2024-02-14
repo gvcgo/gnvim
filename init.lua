@@ -4,3 +4,6 @@ require("core.mappings")
 
 -- Set proxy for git ssh.
 require("gnvim.gitproxy")
+
+-- lazy: plugins management.
+require("gnvim.lazy")
