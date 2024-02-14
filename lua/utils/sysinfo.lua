@@ -1,8 +1,9 @@
 local M = {}
 
--- system info
+-- delimeter for paths
 M.delimeter = package.config:sub(1,1)
 
+-- parse system type
 local parseos = function()
 if M.delimeter == '/' 
 then
@@ -14,13 +15,14 @@ then
     else
         M.os = 'other'
     end
-else 
-then
+else
     M.os = 'windows'
+end
 end
 
 parseos()
 
+-- parse homedir path
 if M.os == 'windows' then
     M.homedir = os.getenv("HOMEPATH")
 else
