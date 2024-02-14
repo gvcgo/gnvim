@@ -26,7 +26,7 @@ end
 
 local setproxy = function(a) 
     local proxy = a.fargs[1]
-    if not proxy or proxy == '""' then 
+    if not proxy or not string.find(proxy, "http://") then 
         vim.notify("proxy not specified.", true)
         return 
     end
