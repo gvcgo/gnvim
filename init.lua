@@ -7,3 +7,6 @@ require("gnvim.gitproxy")
 
 -- lazy: plugins management.
 require("gnvim.lazy")
+
+-- language server
+require("gnvim.lsp")
