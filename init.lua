@@ -17,3 +17,9 @@ require('lualine').setup({
       theme = 'tokyonight'
     }
 })
+
+-- document tree: nvim-tree
+-- disabled by default
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+require("nvim-tree").setup()
