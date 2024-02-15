@@ -1,3 +1,4 @@
+-- https://github.com/folke/tokyonight.nvim
 return {
     -- the colorscheme should be available when starting Neovim
     {

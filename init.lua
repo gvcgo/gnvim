@@ -10,3 +10,10 @@ require("gnvim.lazy")
 
 -- language server
 require("gnvim.lsp")
+
+-- status bar: lualine
+require('lualine').setup({
+    options = {
+      theme = 'tokyonight'
+    }
+})
