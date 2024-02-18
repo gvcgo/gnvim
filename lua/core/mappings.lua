@@ -27,6 +27,9 @@ keymap.set("n", "<C-H>", ":bprevious<CR>")
 keymap.set("n", "<C-[>", ":bn<CR>")
 keymap.set("n", "<C-]>", ":bp<CR>")
 
+-- close buffer
+keymap.set("n", "tb", ":bdelete %<CR>")
+
 -- ---------- 插件 ---------- ---
 -- nvim-tree
 keymap.set("n", "tr", ":NvimTreeToggle<CR>")

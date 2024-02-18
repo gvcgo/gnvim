@@ -33,7 +33,7 @@ return {
                 display = 'row',
 
                 ---@type 'left'|'right'|'center'
-                horizontal = 'center',
+                horizontal = 'right',
 
                 ---@type 'top'|'bottom'|'center'
                 vertical = 'top',
