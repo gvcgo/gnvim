@@ -29,3 +29,6 @@ require("gnvim.treesitter")
 
 -- comment
 require("Comment").setup()
+
+-- fold/unfold code
+require("gnvim.fold")
