@@ -27,8 +27,5 @@ require("nvim-tree").setup()
 -- syntax highlighting
 require("gnvim.treesitter")
 
--- bufferline: show all buffers.
-require("gnvim.bufferline")
-
 -- comment
 require("Comment").setup()
