@@ -44,5 +44,5 @@ require'nvim-treesitter.configs'.setup {
     }
 }
 
--- markdown
+-- markdown preview
 require('glow').setup()

@@ -47,3 +47,6 @@ require("flash").setup()
 
 -- lazygit
 require("gnvim.lazygit")
+
+-- todo list
+require("gnvim.todo")
