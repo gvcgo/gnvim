@@ -38,3 +38,6 @@ require("gnvim.win")
 
 -- tab line
 require("gnvim.tab")
+
+-- telescope
+require("gnvim.telescope")
