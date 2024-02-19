@@ -65,3 +65,4 @@ end
 vim.api.nvim_create_user_command("SetProxy", setproxy, {})
 -- enable/disable proxy for git
 vim.api.nvim_create_user_command("ToggleProxy", toggleproxy, {})
+--

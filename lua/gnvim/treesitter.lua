@@ -43,3 +43,6 @@ require'nvim-treesitter.configs'.setup {
       max_file_lines = nil,
     }
 }
+
+-- markdown
+require('glow').setup()

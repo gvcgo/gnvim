@@ -33,9 +33,6 @@ require("gnvim.treesitter")
 -- comment
 require("Comment").setup()
 
--- windows expand
-require("gnvim.win")
-
 -- tab line
 require("gnvim.tab")
 
@@ -44,3 +41,9 @@ require("gnvim.telescope")
 
 -- trouble
 require("gnvim.trouble")
+
+-- easymotion: flash
+require("flash").setup()
+
+-- lazygit
+require("gnvim.lazygit")
