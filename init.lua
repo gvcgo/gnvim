@@ -41,3 +41,6 @@ require("gnvim.tab")
 
 -- telescope
 require("gnvim.telescope")
+
+-- trouble
+require("gnvim.trouble")
