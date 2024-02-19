@@ -10,6 +10,12 @@ opt.number = true
 opt.expandtab = true
 opt.autoindent = true
 
+-- code folding
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99
+opt.foldenable = false
+
 -- 防止包裹
 opt.wrap = false
 
