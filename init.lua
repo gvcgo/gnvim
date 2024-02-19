@@ -35,3 +35,6 @@ require("gnvim.fold")
 
 -- windows expand
 require("gnvim.win")
+
+-- tab line
+require("gnvim.tab")
