@@ -1,35 +1,81 @@
--- keymap for neovim
+-- keymap register for neovim
+
+--[[
+keyObj
+{
+    Mode = <string>,
+    Key = <string>,
+    Command = <string or function>,
+    Group = <string>,
+    Desc = <string>,
+}
+]]
+
 vim.g.mapleader = " "
 
-local keymap = vim.keymap
+if not vim.g.gkeys then
+    vim.g.gkeys = {
+        keylist = {},
+    }
+end
 
--- ---------- 插入模式 ---------- ---
-keymap.set("i", "jk", "<ESC>")
+local testKey = function(t, key) 
+    for _, v in ipairs(t) do
+		if v == key then
+			return true
+		end
+	end
+	return false
+end
 
--- ---------- 视觉模式 ---------- ---
--- 单行或多行移动
-keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+local register = function(keyObj)
+    if not keyObj.Mode or not keyObj.Key or not keyObj.Command then
+        vim.notify("invalid key object.", true)
+    end
+    -- default values
+    if not keyObj.Group then
+        keyObj.Group = "Comman"
+    end
+    if not keyObj.Desc then
+        keyObj.Desc = "no desc"
+    end
 
--- ---------- 正常模式 ---------- ---
--- 窗口
-keymap.set("n", "<leader>sv", "<C-w>v") -- 水平新增窗口 
-keymap.set("n", "<leader>sh", "<C-w>s") -- 垂直新增窗口
+    local gkeys = vim.g.gkeys
+    if not gkeys.keylist then 
+        gkeys.keylist = {}
+    end
+    local keylist = gkeys.keylist
 
--- 取消高亮
-keymap.set("n", "<leader>nh", ":nohl<CR>")
+    -- find duplicate
+    if not testKey(keylist, keyObj.Key) then
+        table.insert(keylist, keyObj.Key)
+    else
+        vim.notify("key already exists.", true)
+        return
+    end
 
--- 切换buffer
-keymap.set("n", "<C-L>", ":bnext<CR>")
-keymap.set("n", "<C-H>", ":bprevious<CR>")
+    -- add to group
+    if not gkeys[keyObj.Group] then
+        gkeys[keyObj.Group] = {}
+    end
+    table.insert(gkeys[keyObj.Group], keyObj)
 
--- switch buffer
-keymap.set("n", "<C-[>", ":bn<CR>")
-keymap.set("n", "<C-]>", ":bp<CR>")
+    -- set keymap
+    vim.keymap.set(keyObj.Mode, keyObj.Key, keyObj.Command)
+end
 
--- close buffer
-keymap.set("n", "tb", ":bdelete %<CR>")
 
--- ---------- 插件 ---------- ---
--- nvim-tree
-keymap.set("n", "tr", ":NvimTreeToggle<CR>")
+
+register({
+    Mode = "n",
+    Key = "<leader>tr",
+    Command = ":NvimTreeToggle<CR>",
+    Group = "Comman",
+    Desc = "toggles file explorer",
+})
+
+local M = {
+    Register = register,
+}
+
+return M
