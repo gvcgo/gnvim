@@ -1,4 +1,4 @@
--- ToggleTerm
+-- ToggleTerm: https://github.com/akinsho/toggleterm.nvim
 
 require("toggleterm").setup{
     direction = 'float',
@@ -20,19 +20,41 @@ require("toggleterm").setup{
         end
     },
 }
+
+local register = require("core.register").Register
+
 -- terminal
 local Terminal  = require('toggleterm.terminal').Terminal
 local term = Terminal:new({})
+
 function _term_toggle()
     term:toggle()
 end
-vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua _term_toggle()<CR>", {noremap = true, silent = true})
 
--- lazygit
+-- Terminal
+-- vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua _term_toggle()<CR>", {noremap = true, silent = true})
+register({
+    Mode = "n",
+    Key = "<leader>te",
+    Command = "<cmd>lua _term_toggle()<CR>",
+    Group = "Terminal",
+    Desc = "shows terminal.",
+    Opts = {noremap = true, silent = true},
+})
+
+-- Lazygit
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
 function _lazygit_toggle()
   lazygit:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+register({
+    Mode = "n",
+    Key = "<leader>lg",
+    Command = "<cmd>lua _lazygit_toggle()<CR>",
+    Group = "Terminal",
+    Desc = "shows lazygit.",
+    Opts = {noremap = true, silent = true},
+})
