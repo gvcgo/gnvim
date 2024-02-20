@@ -197,3 +197,13 @@ register({
   Group = "Tabs",
   Desc = "swaps a split to right.",
 })
+
+-- Nvim-tree: https://github.com/nvim-tree/nvim-tree.lua
+local register = require("core.register").Register
+register({
+    Mode = "n",
+    Key = "<leader>tr",
+    Command = ":NvimTreeToggle<CR>",
+    Group = "Comman",
+    Desc = "toggles file explorer",
+})

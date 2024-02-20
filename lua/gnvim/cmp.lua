@@ -111,7 +111,7 @@ cmp.setup.cmdline(':', {
     })
 })
 
--- Autopairs
+-- Autopairs: https://github.com/windwp/nvim-autopairs
 local npairs = require("nvim-autopairs")
 local Rule = require('nvim-autopairs.rule')
 
@@ -156,5 +156,5 @@ cmp.event:on(
 )
 --
 
--- surround
+-- surround: https://github.com/kylechui/nvim-surround
 require("nvim-surround").setup()

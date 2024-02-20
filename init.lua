@@ -51,3 +51,6 @@ require("gnvim.lazygit")
 
 -- todo list
 require("gnvim.todo")
+
+-- cheatsheet menu
+require("core.keyui")

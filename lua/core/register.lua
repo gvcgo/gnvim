@@ -15,11 +15,14 @@ keyObj
 
 vim.g.mapleader = " "
 
-if not vim.g.gkeys then
-    vim.g.gkeys = {
+if not _G.gkeys then
+    _G.gkeys = {
         keylist = {},
     }
 end
+
+gkeys = _G.gkeys
+keylist = gkeys.keylist
 
 local testKey = function(t, key) 
     for _, v in ipairs(t) do
@@ -44,13 +47,11 @@ local register = function(keyObj)
     if keyObj.Opts == nil then
         keyObj.Opts = {}
     end
-
-    local gkeys = vim.g.gkeys
+    
     if not gkeys.keylist then 
         gkeys.keylist = {}
     end
-    local keylist = gkeys.keylist
-
+    
     -- find duplicate
     if not testKey(keylist, keyObj.Key) then
         table.insert(keylist, keyObj.Key)
@@ -71,16 +72,10 @@ local register = function(keyObj)
     end
 end
 
-register({
-    Mode = "n",
-    Key = "<leader>tr",
-    Command = ":NvimTreeToggle<CR>",
-    Group = "Comman",
-    Desc = "toggles file explorer",
-})
-
 local M = {
     Register = register,
 }
+
+M.gkeys = gkeys
 
 return M
