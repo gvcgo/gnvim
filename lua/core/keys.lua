@@ -1,6 +1,6 @@
 -- Some Keys
 
-local register = require("core.mappings").Register
+local register = require("core.register").Register
 
 -- Set keys
 register({

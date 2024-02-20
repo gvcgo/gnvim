@@ -8,6 +8,7 @@ keyObj
     Command = <string or function>,
     Group = <string>,
     Desc = <string>,
+    ShowOnly = <value>,
 }
 ]]
 
@@ -61,7 +62,9 @@ local register = function(keyObj)
     table.insert(gkeys[keyObj.Group], keyObj)
 
     -- set keymap
-    vim.keymap.set(keyObj.Mode, keyObj.Key, keyObj.Command)
+    if not keyObj.ShowOnly then
+        vim.keymap.set(keyObj.Mode, keyObj.Key, keyObj.Command)
+    end
 end
 
 

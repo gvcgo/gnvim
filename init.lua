@@ -1,6 +1,6 @@
 -- Options and Keymaps
 require("core.options")
-require("core.mappings")
+require("core.register")
 require("core.keys")
 
 -- Set proxy for git ssh.
