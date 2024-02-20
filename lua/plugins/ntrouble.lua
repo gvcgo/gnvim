@@ -1,4 +1,4 @@
--- Trouble:https://github.com/folke/trouble.nvim
+-- Trouble: https://github.com/folke/trouble.nvim
 
 return {
     {

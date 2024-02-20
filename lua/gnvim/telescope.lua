@@ -214,8 +214,43 @@ telescope.load_extension("ui-select")
 telescope.load_extension("live_grep_args")
 -- load project extension. see project.lua file
 
+-- keymaps
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+-- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+-- vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+-- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+-- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+local register = require("core.register").Register
+
+register({
+  Mode = "n",
+  Key = "<leader>ff",
+  Command = builtin.find_files,
+  Group = "Telescope",
+  Desc = "find files using fd.",
+})
+
+register({
+  Mode = "n",
+  Key = "<leader>fg",
+  Command = builtin.live_grep,
+  Group = "Telescope",
+  Desc = "find string using ripgrep.",
+})
+
+register({
+  Mode = "n",
+  Key = "<leader>fb",
+  Command = builtin.buffers,
+  Group = "Telescope",
+  Desc = "find string in current buffer.",
+})
+
+register({
+  Mode = "n",
+  Key = "<leader>fh",
+  Command = builtin.help_tags,
+  Group = "Telescope",
+  Desc = "find help info.",
+})

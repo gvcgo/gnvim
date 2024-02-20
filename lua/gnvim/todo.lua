@@ -1,4 +1,5 @@
--- TODOList
+-- TODOList: https://github.com/folke/todo-comments.nvim
+
 local todoc = require("todo-comments")
 
 todoc.setup({
@@ -66,10 +67,30 @@ todoc.setup({
     },
 })
 
-vim.keymap.set("n", "]t", function()
-    todoc.jump_next()
-  end, { desc = "Next todo comment" })
+-- keymaps
+
+-- vim.keymap.set("n", "]t", function()
+--     todoc.jump_next()
+--   end, { desc = "Next todo comment" })
   
-  vim.keymap.set("n", "[t", function()
-    todoc.jump_prev()
-  end, { desc = "Previous todo comment" })
+--   vim.keymap.set("n", "[t", function()
+--     todoc.jump_prev()
+--   end, { desc = "Previous todo comment" })
+
+local register = require("core.register").Register
+
+register({
+    Mode = "n",
+    Key = "]t",
+    Command = function() todoc.jump_next() end,
+    Group = "ToDo",
+    Desc = "goto next todo comment in current buffer.",
+})
+
+register({
+  Mode = "n",
+  Key = "[t",
+  Command = function() todoc.jump_prev() end,
+  Group = "ToDo",
+  Desc = "goto previous todo comment in current buffer.",
+})

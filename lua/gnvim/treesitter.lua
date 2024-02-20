@@ -1,6 +1,6 @@
 -- Syntax highlighting
 
--- blankline
+-- blankline: https://github.com/lukas-reineke/indent-blankline.nvim
 local highlight = {
   "RainbowRed",
   "RainbowYellow",
@@ -23,13 +23,15 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
   vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 end)
 
+-- https://github.com/HiPhish/rainbow-delimiters.nvim
 vim.g.rainbow_delimiters = { highlight = highlight }
 require("ibl").setup { scope = { highlight = highlight } }
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 -- 
 
-require'nvim-treesitter.configs'.setup {
+-- https://github.com/nvim-treesitter/nvim-treesitter
+require("nvim-treesitter.configs").setup {
     -- one of "all" or a list of languages
     ensure_installed = { 
          "go", "vim", "c", "lua", "javascript",
@@ -46,3 +48,13 @@ require'nvim-treesitter.configs'.setup {
 
 -- markdown preview
 require('glow').setup()
+
+local register = require("core.register").Register
+
+register({
+  Mode = "n",
+  Key = "<leader>md",
+  Command = ":Glow<CR>",
+  Group = "Markdown",
+  Desc = "previews current markdown file.",
+})

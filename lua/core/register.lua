@@ -9,6 +9,7 @@ keyObj
     Group = <string>,
     Desc = <string>,
     ShowOnly = <value>,
+    Opts = {},
 }
 ]]
 
@@ -40,6 +41,9 @@ local register = function(keyObj)
     if not keyObj.Desc then
         keyObj.Desc = "no desc"
     end
+    if keyObj.Opts == nil then
+        keyObj.Opts = {}
+    end
 
     local gkeys = vim.g.gkeys
     if not gkeys.keylist then 
@@ -63,11 +67,9 @@ local register = function(keyObj)
 
     -- set keymap
     if not keyObj.ShowOnly then
-        vim.keymap.set(keyObj.Mode, keyObj.Key, keyObj.Command)
+        vim.keymap.set(keyObj.Mode, keyObj.Key, keyObj.Command, keyObj.Opts)
     end
 end
-
-
 
 register({
     Mode = "n",
