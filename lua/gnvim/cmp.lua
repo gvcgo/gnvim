@@ -17,6 +17,41 @@ local luasnip = require("luasnip")
 
 local cmp = require("cmp")
 
+-- keymaps
+
+local keyNext = "<C-]>"
+local keyPrev = "<C-[>"
+local keyConfirm = "<CR>"
+
+local register = require("core.register").Register
+
+register({
+    Mode = "n",
+    Key = keyNext,
+    Command = "show only",
+    Group = "Completion",
+    Desc = "moves cursor to next item.",
+    ShowOnly = true,
+})
+
+register({
+    Mode = "n",
+    Key = keyPrev,
+    Command = "show only",
+    Group = "Completion",
+    Desc = "moves cursor to next item.",
+    ShowOnly = true,
+})
+
+register({
+    Mode = "n",
+    Key = keyConfirm,
+    Command = "show only",
+    Group = "Completion",
+    Desc = "chooses current item.",
+    ShowOnly = true,
+})
+
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -30,7 +65,7 @@ cmp.setup {
         { name = "buffer" },
     },
     mapping = cmp.mapping.preset.insert {
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        [keyNext] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
                 -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
@@ -44,7 +79,7 @@ cmp.setup {
             end
         end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        [keyPrev] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -53,7 +88,8 @@ cmp.setup {
                 fallback()
             end
         end, { "i", "s" }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        [keyConfirm] = cmp.mapping.confirm({ select = true }), 
     },
     experimental = {
         ghost_text = true,
