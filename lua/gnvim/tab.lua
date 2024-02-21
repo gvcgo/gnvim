@@ -200,7 +200,7 @@ register({
 
 register({
   Mode = "n",
-  Key = "<C-,>",
+  Key = "<C-->",
   Command = ":bprevious<CR>",
   Group = "Tabs",
   Desc = "goes to previous buffer",
@@ -208,7 +208,7 @@ register({
 
 register({
   Mode = "n",
-  Key = "<C-.>",
+  Key = "<C-=>",
   Command = ":bnext<CR>",
   Group = "Tabs",
   Desc = "goes to next buffer",
