@@ -55,7 +55,8 @@ require("gnvim.todo")
 -- dap
 require("gnvim.debug")
 
-
+-- vim tutorial
+require("gnvim.vimkeys")
 
 -- keep cheatsheet to the last.
 -- cheatsheet menu
