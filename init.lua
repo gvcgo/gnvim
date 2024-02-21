@@ -53,4 +53,4 @@ require("gnvim.lazygit")
 require("gnvim.todo")
 
 -- cheatsheet menu
-require("core.keyui")
+vim.api.nvim_create_user_command("CheatSheet", require("core.keyui").show, {})

@@ -8,66 +8,51 @@ if not gkeys then
     return {}
 end
 
--- items
-
-local generateItemLines = function(group)
-    local lines = {}
-    local gr = gkeys[group]
-    for _, v in pairs(gr) do
-        local s = string.format('[%s] "%s", %s', v.Mode, v.Key, v.Desc )
-        table.insert(lines, Menu.item(s))
-    end
-    return lines
+local comparator = function(a, b)
+    return string.byte(a) - string.byte(b) < 0
 end
 
-local itemWindowOptions = {
-    position = "50%",
-    size = { width = "70%", height = "40%" },
-    border = { 
-        style = "single",
-        text = {
-            top = "keys",
-            top_align = "center",
-        },
-    },
-    win_options = {
-        winhighlight = "Normal:Normal,FloatBorder:Normal",
-    },
-    win_config = {
-        focusable = true,
-    },
-}
+local formatMode = function(mode)
+    local t = type(mode)
+    if t == "string" then
+        return mode
+    else
+        local s = ""
+        for _, v in pairs(mode) do
+            s = s..v
+        end
+        return s
+    end
+end
 
-local itemDataOptions = {
-    lines = {},
-    max_width = 20,
-    keymap = {
-        focus_next = { "j", "<Down>", "<Tab>" },
-        focus_prev = { "k", "<Up>", "<S-Tab>" },
-        close = { "<Esc>", "<C-c>" },
-        -- submit = { "<CR>", "<Space>" },
-    },
-    on_close = function() print("Menu Closed!") end,
-    -- on_submit = function(item) print("Menu Submitted: ", item.text) end,
-}
-
-local generateGroupLines = function()
-    local lines = {}
+local getCheatLines = function()
+    local grouplist = {}
     for k, _ in pairs(gkeys) do
         if k ~= "keylist" then
-            table.insert(lines, Menu.item(k))
+            table.insert(grouplist, k)
+        end
+    end
+    table.sort(grouplist, comparator)
+
+    local lines = {}
+    for _, k in pairs(grouplist) do
+        table.insert(lines, Menu.separator(k, { char = "-", text_align = "left" }))
+        local gr = gkeys[k]
+        for _, v in pairs(gr) do
+            local s = string.format('[%s] "%s", %s', formatMode(v.Mode), v.Key, v.Desc )
+            table.insert(lines, Menu.item(s))
         end
     end
     return lines
 end
 
-local groupMenuWindowOptions = {
+local cheatSheetOptions = {
     position = "50%",
-    size = { width = 20, height = "40%" },
+    size = { width = "80%", height = "90%" },
     border = { 
         style = "single",
         text = {
-            top = "group",
+            top = "keymap cheatsheet",
             top_align = "center",
         },
     },
@@ -79,45 +64,24 @@ local groupMenuWindowOptions = {
     },
 }
 
-local groupMenuDataOptions = {
-    lines = generateGroupLines(),
+local cheatDataOptions = {
+    lines = getCheatLines(),
     max_width = 20,
     keymap = {
         focus_next = { "j", "<Down>", "<Tab>" },
         focus_prev = { "k", "<Up>", "<S-Tab>" },
         close = { "<Esc>", "<C-c>" },
-        submit = { "<CR>", "<Space>" },
+        submit = { "<CR>" },
     },
-    -- on_close = function() print("Menu Closed!") end,
-    on_submit = function(item)
-        itemDataOptions.lines = generateItemLines(item.text)
-        local itemMenu = Menu(itemWindowOptions, itemDataOptions)
-        itemMenu:mount()
-    end,
+    -- on_close = function() print("CheatSheet Closed!") end,
+    -- on_submit = function(item) print("CheatSheet Submitted: ", item.text) end,
 }
 
-local groupMenu = Menu(groupMenuWindowOptions, groupMenuDataOptions)
-
-
--- mount the component
--- groupMenu:mount()
+local cheatMenu = Menu(cheatSheetOptions, cheatDataOptions)
 
 local M = {}
 M.show = function()
-    groupMenu:mount()
+    cheatMenu:mount()
 end
-
--- command
-vim.api.nvim_create_user_command("CheatSheet", M.show, {})
-
--- keymap for cheatsheet
-local register = require("core.register").Register
-register({
-    Mode = "n",
-    Key = "<leader>c",
-    Command = ":CheatSheet<CR>",
-    Group = "CheatSheet",
-    Desc = "shows keymaps for gnvim.",
-})
 
 return M

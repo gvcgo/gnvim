@@ -192,7 +192,7 @@ local lspCallback = function(ev)
     })
 
     register({
-      Mode = "n",
+      Mode = {"n", "v"},
       Key = "<leader>ca",
       Command = vim.lsp.buf.code_action,
       Group = "LSP",
@@ -259,3 +259,135 @@ if vim.lsp.inlay_hint then
         Opts = { desc = "Toggle Inlay Hints" },
     })
 end
+
+-- keymap for cheatsheet only, never registered.
+
+register({
+  Mode = "n",
+  Key = "gd",
+  Command = vim.lsp.buf.definition,
+  Group = "LSP",
+  Desc = "goes to definition.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "gr",
+  Command = vim.lsp.buf.references,
+  Group = "LSP",
+  Desc = "shows references.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "K",
+  Command = vim.lsp.buf.hover,
+  Group = "LSP",
+  Desc = "shows hovering info.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "<space>rn",
+  Command = vim.lsp.buf.rename,
+  Group = "LSP",
+  Desc = "renames a token.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "<leader>lf",
+  Command = function() vim.lsp.buf.format { async = true } end,
+  Group = "LSP",
+  Desc = "formats code.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "gD",
+  Command = vim.lsp.buf.declaration,
+  Group = "LSP",
+  Desc = "goes to declaration.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "gi",
+  Command = vim.lsp.buf.implementation,
+  Group = "LSP",
+  Desc = "shows implementations.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "<C-k>",
+  Command = vim.lsp.buf.signature_help,
+  Group = "LSP",
+  Desc = "shows signature help.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "<leader>lwa",
+  Command = vim.lsp.buf.add_workspace_folder,
+  Group = "LSP",
+  Desc = "adds workspace folder.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "<leader>lwr",
+  Command = vim.lsp.buf.remove_workspace_folder,
+  Group = "LSP",
+  Desc = "removes workspace folder.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "<space>lwl",
+  Command = function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+  Group = "LSP",
+  Desc = "lists workspace folder.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = "n",
+  Key = "<leader>D",
+  Command = vim.lsp.buf.type_definition,
+  Group = "LSP",
+  Desc = "shows type of definition.",
+  ShowOnly = true,
+  RegLater = true,
+})
+
+register({
+  Mode = {"n", "v"},
+  Key = "<leader>ca",
+  Command = vim.lsp.buf.code_action,
+  Group = "LSP",
+  Desc = "shows code action.",
+  ShowOnly = true,
+  RegLater = true,
+})

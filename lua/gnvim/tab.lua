@@ -198,12 +198,36 @@ register({
   Desc = "swaps a split to right.",
 })
 
+register({
+  Mode = "n",
+  Key = "<C-,>",
+  Command = ":bp<CR>",
+  Group = "Tabs",
+  Desc = "goes to previous buffer",
+})
+
+register({
+  Mode = "n",
+  Key = "<C-.>",
+  Command = ":bn<CR>",
+  Group = "Tabs",
+  Desc = "goes to next buffer",
+})
+
+register({
+  Mode = "n",
+  Key = "tb",
+  Command = ":bdelete %<CR>",
+  Group = "Tabs",
+  Desc = "closes current buffer",
+})
+
 -- Nvim-tree: https://github.com/nvim-tree/nvim-tree.lua
 local register = require("core.register").Register
 register({
     Mode = "n",
-    Key = "<leader>tr",
+    Key = "tr",
     Command = ":NvimTreeToggle<CR>",
-    Group = "Comman",
+    Group = "Tabs",
     Desc = "toggles file explorer",
 })

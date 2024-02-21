@@ -9,6 +9,7 @@ keyObj
     Group = <string>,
     Desc = <string>,
     ShowOnly = <value>,
+    RegLater = <value>, -- do not add to keylist. do not test duplicate.
     Opts = {},
 }
 ]]
@@ -53,11 +54,13 @@ local register = function(keyObj)
     end
     
     -- find duplicate
-    if not testKey(keylist, keyObj.Key) then
-        table.insert(keylist, keyObj.Key)
-    else
-        vim.notify("key already exists.", true)
-        return
+    if not keyObj.RegLater then
+        if not testKey(keylist, keyObj.Key) then
+            table.insert(keylist, keyObj.Key)
+        else
+            vim.notify("key already exists.", true)
+            return
+        end
     end
 
     -- add to group

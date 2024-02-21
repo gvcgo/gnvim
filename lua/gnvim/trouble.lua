@@ -20,11 +20,11 @@ local register = require("core.register").Register
 
 -- show keymaps in telescope for trouble plugin.
 register({
-    Mode = "telescope",
-    Key = "[Tele] <c-t>",
+    Mode = "t",
+    Key = "{in telescope} <c-t>",
     Command = trouble.open_with_trouble,
     Group = "Trouble",
-    Desc = "open trouble in telescope.",
+    Desc = "opens trouble in telescope.",
     ShowOnly = true,
 })
 

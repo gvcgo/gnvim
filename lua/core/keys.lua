@@ -51,26 +51,49 @@ register({
     Desc = "removes search highlighting",
 })
 
+-- code folding
 register({
     Mode = "n",
-    Key = "<C-[>",
-    Command = ":bp<CR>",
+    Key = "zc",
+    Command = "fold",
     Group = "Comman",
-    Desc = "goes to previous buffer",
+    Desc = "folds current code block.",
+    ShowOnly = true,
 })
 
 register({
     Mode = "n",
-    Key = "<C-]>",
-    Command = ":bn<CR>",
+    Key = "zo",
+    Command = "unfold",
     Group = "Comman",
-    Desc = "goes to next buffer",
+    Desc = "unfolds current code block.",
+    ShowOnly = true,
 })
 
 register({
     Mode = "n",
-    Key = "tb",
-    Command = ":bdelete %<CR>",
+    Key = "zM",
+    Command = "fold",
     Group = "Comman",
-    Desc = "closes current buffer",
+    Desc = "folds all code block.",
+    ShowOnly = true,
+})
+
+register({
+    Mode = "n",
+    Key = "zr",
+    Command = "unfold",
+    Group = "Comman",
+    Desc = "unfolds code blocks.",
+    ShowOnly = true,
+})
+
+-- keymap for cheatsheet
+local register = require("core.register").Register
+register({
+    Mode = "n",
+    Key = "<leader>c",
+    Command = ":CheatSheet<CR>",
+    Group = "Comman",
+    Desc = "shows keymaps for gnvim.",
 })
