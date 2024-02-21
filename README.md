@@ -10,6 +10,16 @@ Using [gvc]("https://github.com/gvcgo/gvc"). See command **"g nv -h"**.
 - [fd](https://github.com/sharkdp/fd)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 
+## features
+- LSP
+- DAP
+- Cheatsheet
+- Tutorial for vim
+- Go project ready
+- Proxy provided by gvc
+- Markdown preview
+- Lazygit integration
+
 ## gallery
 
 ![gnvim-dashboard](https://github.com/moqsien/img_repo/raw/main/gnvim.png)
