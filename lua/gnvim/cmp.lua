@@ -39,7 +39,7 @@ register({
     Key = keyPrev,
     Command = "show only",
     Group = "Completion",
-    Desc = "moves cursor to next item.",
+    Desc = "moves cursor to previous item.",
     ShowOnly = true,
 })
 

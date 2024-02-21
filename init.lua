@@ -55,6 +55,11 @@ require("gnvim.todo")
 -- dap
 require("gnvim.debug")
 
+
+
 -- keep cheatsheet to the last.
 -- cheatsheet menu
 vim.api.nvim_create_user_command("CheatSheet", require("core.keyui").show, {})
+
+-- dashboard
+require("alpha")
