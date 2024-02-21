@@ -84,7 +84,7 @@ register({
     Key = "]t",
     Command = function() todoc.jump_next() end,
     Group = "ToDo",
-    Desc = "goto next todo comment in current buffer.",
+    Desc = "goes to next todo comment in current buffer.",
 })
 
 register({
@@ -92,5 +92,5 @@ register({
   Key = "[t",
   Command = function() todoc.jump_prev() end,
   Group = "ToDo",
-  Desc = "goto previous todo comment in current buffer.",
+  Desc = "goes to previous todo comment in current buffer.",
 })
