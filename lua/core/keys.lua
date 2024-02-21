@@ -88,6 +88,14 @@ register({
     ShowOnly = true,
 })
 
+register({
+    Mode = "n",
+    Key = "Q",
+    Command = ":qa!<CR>",
+    Group = "Comman",
+    Desc = "Forces to exit nvim without saving buffers.",
+})
+
 -- keymap for cheatsheet
 local register = require("core.register").Register
 register({

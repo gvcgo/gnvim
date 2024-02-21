@@ -38,7 +38,7 @@ local register = require("core.register").Register
 
 register({
     Mode = "n",
-    Key = "<space>le",
+    Key = "<leader>le",
     Command = vim.diagnostic.open_float,
     Group = "Diagnostic",
     Desc = "opens diagnostic buffer.",
@@ -62,7 +62,7 @@ register({
 
 register({
     Mode = "n",
-    Key = "<space>lq",
+    Key = "<leader>lq",
     Command = vim.diagnostic.setloclist,
     Group = "Diagnostic",
     Desc = "set loclist for diagnostic.",
@@ -75,6 +75,8 @@ register({
 -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 -- vim.keymap.set('n', '<space>lq', vim.diagnostic.setloclist)
 
+-- callback 
+
 local lspCallback = function(ev)
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -82,152 +84,20 @@ local lspCallback = function(ev)
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
-
-    register({
-        Mode = "n",
-        Key = "gd",
-        Command = vim.lsp.buf.definition,
-        Group = "LSP",
-        Desc = "goes to definition.",
-        Opts = opts,
-    })
-
-    register({
-        Mode = "n",
-        Key = "gr",
-        Command = vim.lsp.buf.references,
-        Group = "LSP",
-        Desc = "shows references.",
-        Opts = opts,
-    })
-
-    register({
-        Mode = "n",
-        Key = "K",
-        Command = vim.lsp.buf.hover,
-        Group = "LSP",
-        Desc = "shows hovering info.",
-        Opts = opts,
-    })
-
-    register({
-        Mode = "n",
-        Key = "<space>rn",
-        Command = vim.lsp.buf.rename,
-        Group = "LSP",
-        Desc = "renames a token.",
-        Opts = opts,
-    })
-
-    register({
-        Mode = "n",
-        Key = "<leader>lf",
-        Command = function() vim.lsp.buf.format { async = true } end,
-        Group = "LSP",
-        Desc = "formats code.",
-        Opts = opts,
-    })
-
-    register({
-        Mode = "n",
-        Key = "gD",
-        Command = vim.lsp.buf.declaration,
-        Group = "LSP",
-        Desc = "goes to declaration.",
-        Opts = opts,
-    })
-
-    register({
-        Mode = "n",
-        Key = "gi",
-        Command = vim.lsp.buf.implementation,
-        Group = "LSP",
-        Desc = "shows implementations.",
-        Opts = opts,
-    })
-
-    register({
-        Mode = "n",
-        Key = "<C-k>",
-        Command = vim.lsp.buf.signature_help,
-        Group = "LSP",
-        Desc = "shows signature help.",
-        Opts = opts,
-    })
-
-    register({
-      Mode = "n",
-      Key = "<leader>lwa",
-      Command = vim.lsp.buf.add_workspace_folder,
-      Group = "LSP",
-      Desc = "adds workspace folder.",
-      Opts = opts,
-    })
-
-    register({
-      Mode = "n",
-      Key = "<leader>lwr",
-      Command = vim.lsp.buf.remove_workspace_folder,
-      Group = "LSP",
-      Desc = "removes workspace folder.",
-      Opts = opts,
-    })
-
-    register({
-      Mode = "n",
-      Key = "<space>lwl",
-      Command = function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-      Group = "LSP",
-      Desc = "lists workspace folder.",
-      Opts = opts,
-    })
-
-    register({
-      Mode = "n",
-      Key = "<leader>D",
-      Command = vim.lsp.buf.type_definition,
-      Group = "LSP",
-      Desc = "shows type of definition.",
-      Opts = opts,
-    })
-
-    register({
-      Mode = {"n", "v"},
-      Key = "<leader>ca",
-      Command = vim.lsp.buf.code_action,
-      Group = "LSP",
-      Desc = "shows code action.",
-      Opts = opts,
-    })
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>lwl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
 end
-
--- callback 
-
--- function(ev)
---   -- Enable completion triggered by <c-x><c-o>
---   vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
---   -- Buffer local mappings.
---   -- See `:help vim.lsp.*` for documentation on any of the below functions
---   local opts = { buffer = ev.buf }
---   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
---   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
---   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
---   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
---   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
---   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
---   vim.keymap.set('n', '<space>lwa', vim.lsp.buf.add_workspace_folder, opts)
---   vim.keymap.set('n', '<space>lwr', vim.lsp.buf.remove_workspace_folder, opts)
---   vim.keymap.set('n', '<space>lwl', function()
---     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
---   end, opts)
---   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
---   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
---   vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
---   vim.keymap.set('n', '<space>lf', function()
---     vim.lsp.buf.format { async = true }
---   end, opts)
--- end
 
 --
 
@@ -261,7 +131,6 @@ if vim.lsp.inlay_hint then
 end
 
 -- keymap for cheatsheet only, never registered.
-
 register({
   Mode = "n",
   Key = "gd",
@@ -294,7 +163,7 @@ register({
 
 register({
   Mode = "n",
-  Key = "<space>rn",
+  Key = "<leader>rn",
   Command = vim.lsp.buf.rename,
   Group = "LSP",
   Desc = "renames a token.",
@@ -364,7 +233,7 @@ register({
 
 register({
   Mode = "n",
-  Key = "<space>lwl",
+  Key = "<leader>lwl",
   Command = function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
   Group = "LSP",
   Desc = "lists workspace folder.",

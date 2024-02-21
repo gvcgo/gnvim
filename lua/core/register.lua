@@ -34,6 +34,21 @@ local testKey = function(t, key)
 	return false
 end
 
+local insertKeyObj = function(keyObj)
+     -- new group
+     if not gkeys[keyObj.Group] then
+        gkeys[keyObj.Group] = {}
+    end
+    -- already added.
+    for _, v in pairs(gkeys[keyObj.Group]) do
+        if v.Key == keyObj.Key then
+            return
+        end
+    end
+    -- add to group.
+    table.insert(gkeys[keyObj.Group], keyObj)
+end
+
 local register = function(keyObj)
     if not keyObj.Mode or not keyObj.Key or not keyObj.Command then
         vim.notify("invalid key object.", true)
@@ -58,16 +73,18 @@ local register = function(keyObj)
         if not testKey(keylist, keyObj.Key) then
             table.insert(keylist, keyObj.Key)
         else
-            vim.notify("key already exists.", true)
+            vim.notify("key ".. keyObj.Key .." already exists.", true)
             return
         end
     end
 
-    -- add to group
-    if not gkeys[keyObj.Group] then
-        gkeys[keyObj.Group] = {}
-    end
-    table.insert(gkeys[keyObj.Group], keyObj)
+    -- -- add to group
+    -- if not gkeys[keyObj.Group] then
+    --     gkeys[keyObj.Group] = {}
+    -- end
+    -- -- insert keyObj to group
+    -- table.insert(gkeys[keyObj.Group], keyObj)
+    insertKeyObj(keyObj)
 
     -- set keymap
     if not keyObj.ShowOnly then
