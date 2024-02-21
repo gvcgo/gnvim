@@ -9,6 +9,7 @@ Using [gvc]("https://github.com/gvcgo/gvc"). See command **"g nv -h"**.
 - [tree-sitter](https://github.com/tree-sitter/tree-sitter)
 - [fd](https://github.com/sharkdp/fd)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
 
 ## features
 - LSP
