@@ -1,2 +1,21 @@
 # gnvim
 Neovim conf using gvc.
+
+## installation
+Using [gvc]("https://github.com/gvcgo/gvc"). See command **"g nv -h"**.
+
+## dependencies
+- [gvc](https://github.com/gvcgo/gvc/releases)
+- [tree-sitter](https://github.com/tree-sitter/tree-sitter)
+- [fd](https://github.com/sharkdp/fd)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+
+## gallery
+
+![gnvim-dashboard](https://github.com/moqsien/img_repo/raw/main/gnvim.png)
+
+![cheatsheet](https://github.com/moqsien/img_repo/raw/main/gnvim_cheatsheet.png)
+
+![go-project](https://github.com/moqsien/img_repo/raw/main/gnvim_go.png)
+
+![tutorial](https://github.com/moqsien/img_repo/raw/main/vim_tutorial.png)
