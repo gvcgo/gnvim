@@ -1,5 +1,11 @@
 -- setup for LSP.
 
+-- popui for  diagnostic, references, etc.
+vim.ui.select = require("popui.ui-overrider")
+vim.ui.input = require("popui.input-overrider")
+vim.api.nvim_set_keymap("n", ",m", ':lua require"popui.marks-manager"()<CR>', { noremap = true, silent = true })
+
+
 -- https://github.com/williamboman/mason.nvim
 require("mason").setup({
   ui = {
@@ -36,12 +42,21 @@ lspconfig.gopls.setup({})
 
 local register = require("core.register").Register
 
+-- vim.api.nvim_set_keymap("n", ",d", ':lua require"popui.diagnostics-navigator"()<CR>', { noremap = true, silent = true }) 
+-- register({
+--     Mode = "n",
+--     Key = "<leader>le",
+--     Command = vim.diagnostic.open_float,
+--     Group = "Diagnostic",
+--     Desc = "opens diagnostic buffer.",
+-- })
 register({
-    Mode = "n",
-    Key = "<leader>le",
-    Command = vim.diagnostic.open_float,
-    Group = "Diagnostic",
-    Desc = "opens diagnostic buffer.",
+  Mode = "n",
+  Key = "<leader>le",
+  Command = ':lua require"popui.diagnostics-navigator"()<CR>',
+  Group = "Diagnostic",
+  Desc = "opens diagnostic buffer.",
+  Opts = { noremap = true, silent = true },
 })
 
 register({
@@ -85,7 +100,9 @@ local lspCallback = function(ev)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    -- vim.api.nvim_set_keymap("n", ",r", ':lua require"popui.references-navigator"()<CR>', { noremap = true, silent = true })
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', 'gr', ':lua require"popui.references-navigator"()<CR>', opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, opts)
